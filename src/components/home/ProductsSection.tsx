@@ -93,7 +93,7 @@ export default function ProductsSection() {
             return (
               <Link
                 key={product.slug}
-                href={`/urunler/${product.slug}`}
+                href={{ pathname: '/urunler/[slug]', params: { slug: product.slug } }}
                 className="group relative flex-shrink-0 snap-start"
               >
                 <div className="relative h-[320px] w-[260px] overflow-hidden rounded-xl md:h-[360px] md:w-[280px]">

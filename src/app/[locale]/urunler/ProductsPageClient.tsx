@@ -35,7 +35,7 @@ export default function ProductsPageClient() {
               {products.map((product) => (
                 <Link
                   key={product.slug}
-                  href={`/urunler/${product.slug}`}
+                  href={{ pathname: '/urunler/[slug]', params: { slug: product.slug } }}
                   className="group relative overflow-hidden rounded-xl border border-white/[0.06] bg-ink-800 transition-all duration-300 hover:border-gold/20 hover:shadow-[0_0_40px_rgba(196,146,42,0.06)]"
                 >
                   <div className="relative aspect-[4/3] overflow-hidden">

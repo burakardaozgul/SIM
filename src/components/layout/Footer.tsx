@@ -13,7 +13,7 @@ const productLinks = [
   { key: 'custom', href: '/urunler' },
   { key: 'blanket', href: '/urunler' },
   { key: 'chemicals', href: '/urunler' },
-];
+] as const;
 
 const companyLinks = [
   { labelKey: 'about', href: '/hakkimizda' },
@@ -23,7 +23,7 @@ const companyLinks = [
   { labelKey: 'blog', href: '/blog' },
   { labelKey: 'privacy', href: '/gizlilik-politikasi' },
   { labelKey: 'terms', href: '/kullanim-kosullari' },
-];
+] as const;
 
 export default function Footer() {
   const t = useTranslations('footer');

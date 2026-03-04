@@ -12,92 +12,62 @@ export default function MobileBottomNav() {
   const t = useTranslations('nav');
   const pathname = usePathname();
 
-  const items = [
-    {
-      key: 'home',
-      label: t('home'),
-      href: '/',
-      icon: Home,
-      isActive: pathname === '/',
-      type: 'link' as const,
-    },
-    {
-      key: 'products',
-      label: t('products'),
-      href: '/urunler',
-      icon: Package,
-      isActive: pathname.startsWith('/urunler'),
-      type: 'link' as const,
-    },
-    {
-      key: 'directions',
-      label: t('directions'),
-      href: GOOGLE_MAPS_URL,
-      icon: Navigation,
-      isActive: false,
-      type: 'external' as const,
-    },
-    {
-      key: 'callNow',
-      label: t('callNow'),
-      href: `tel:${PHONE_NUMBER}`,
-      icon: PhoneCall,
-      isActive: false,
-      type: 'tel' as const,
-    },
-  ];
+  const isHome = pathname === '/';
+  const isProducts = pathname.startsWith('/urunler');
 
   return (
     <nav className="fixed bottom-0 left-0 right-0 z-40 border-t border-white/[0.08] bg-ink-900/95 backdrop-blur-md lg:hidden">
       <div className="mx-auto flex max-w-lg items-stretch">
-        {items.map((item) => {
-          const Icon = item.icon;
+        {/* Ana Sayfa */}
+        <Link href="/" className="relative flex flex-1">
+          <span
+            className={`flex flex-1 flex-col items-center justify-center gap-1 py-2.5 text-[10px] font-medium tracking-wide transition-colors ${
+              isHome ? 'text-gold' : 'text-silver/70 active:text-gold'
+            }`}
+          >
+            <Home size={20} strokeWidth={isHome ? 2.2 : 1.6} className={isHome ? 'text-gold' : ''} />
+            <span className="leading-none">{t('home')}</span>
+            {isHome && (
+              <span className="absolute top-0 left-1/2 h-[2px] w-8 -translate-x-1/2 rounded-b-full bg-gold" />
+            )}
+          </span>
+        </Link>
 
-          const content = (
-            <span
-              className={`flex flex-1 flex-col items-center justify-center gap-1 py-2.5 text-[10px] font-medium tracking-wide transition-colors ${
-                item.isActive
-                  ? 'text-gold'
-                  : 'text-silver/70 active:text-gold'
-              }`}
-            >
-              <Icon
-                size={20}
-                strokeWidth={item.isActive ? 2.2 : 1.6}
-                className={item.isActive ? 'text-gold' : ''}
-              />
-              <span className="leading-none">{item.label}</span>
-              {item.isActive && (
-                <span className="absolute top-0 left-1/2 h-[2px] w-8 -translate-x-1/2 rounded-b-full bg-gold" />
-              )}
-            </span>
-          );
+        {/* Ürünler */}
+        <Link href="/urunler" className="relative flex flex-1">
+          <span
+            className={`flex flex-1 flex-col items-center justify-center gap-1 py-2.5 text-[10px] font-medium tracking-wide transition-colors ${
+              isProducts ? 'text-gold' : 'text-silver/70 active:text-gold'
+            }`}
+          >
+            <Package size={20} strokeWidth={isProducts ? 2.2 : 1.6} className={isProducts ? 'text-gold' : ''} />
+            <span className="leading-none">{t('products')}</span>
+            {isProducts && (
+              <span className="absolute top-0 left-1/2 h-[2px] w-8 -translate-x-1/2 rounded-b-full bg-gold" />
+            )}
+          </span>
+        </Link>
 
-          if (item.type === 'link') {
-            return (
-              <Link
-                key={item.key}
-                href={item.href}
-                className="relative flex flex-1"
-              >
-                {content}
-              </Link>
-            );
-          }
+        {/* Yol Tarifi */}
+        <a
+          href={GOOGLE_MAPS_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="relative flex flex-1"
+        >
+          <span className="flex flex-1 flex-col items-center justify-center gap-1 py-2.5 text-[10px] font-medium tracking-wide text-silver/70 transition-colors active:text-gold">
+            <Navigation size={20} strokeWidth={1.6} />
+            <span className="leading-none">{t('directions')}</span>
+          </span>
+        </a>
 
-          return (
-            <a
-              key={item.key}
-              href={item.href}
-              {...(item.type === 'external'
-                ? { target: '_blank', rel: 'noopener noreferrer' }
-                : {})}
-              className="relative flex flex-1"
-            >
-              {content}
-            </a>
-          );
-        })}
+        {/* Hemen Ara */}
+        <a href={`tel:${PHONE_NUMBER}`} className="relative flex flex-1">
+          <span className="flex flex-1 flex-col items-center justify-center gap-1 py-2.5 text-[10px] font-medium tracking-wide text-silver/70 transition-colors active:text-gold">
+            <PhoneCall size={20} strokeWidth={1.6} />
+            <span className="leading-none">{t('callNow')}</span>
+          </span>
+        </a>
       </div>
 
       {/* Safe area padding for devices with home indicator */}

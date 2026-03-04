@@ -139,7 +139,7 @@ export default function ProductDetailClient({ product }: { product: Product }) {
                 {related.map((rp) => (
                   <Link
                     key={rp.slug}
-                    href={`/urunler/${rp.slug}`}
+                    href={{ pathname: '/urunler/[slug]', params: { slug: rp.slug } }}
                     className="group overflow-hidden rounded-xl border border-white/[0.06] bg-ink-900 transition-all hover:border-gold/20"
                   >
                     <div className="relative aspect-[4/3] overflow-hidden">

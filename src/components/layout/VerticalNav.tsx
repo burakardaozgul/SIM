@@ -117,7 +117,8 @@ export default function VerticalNav() {
                 <button
                   key={loc}
                   onClick={() => {
-                    router.replace(pathname, { locale: loc });
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                    router.replace(pathname as any, { locale: loc });
                     setMobileOpen(false);
                   }}
                   className={`flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium transition-all ${

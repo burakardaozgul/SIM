@@ -19,7 +19,7 @@ const SLIDE_ALTS = [
   'SIM Baskı Malzemeleri - Dünya markalarının Türkiye distribütörü',
 ];
 
-const SLIDE_LINKS = ['/urunler', '/ozel-renk-uretimi', '/temsilcilikler'];
+const SLIDE_LINKS = ['/urunler', '/ozel-renk-uretimi', '/temsilcilikler'] as const;
 
 const AUTO_PLAY_INTERVAL = 6000;
 
