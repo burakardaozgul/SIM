@@ -1,7 +1,4 @@
 import { NextResponse } from 'next/server';
-import { Resend } from 'resend';
-
-const resend = new Resend(process.env.RESEND_API_KEY);
 
 const NOTIFY_EMAIL = 'info@simlimited.net';
 
@@ -17,8 +14,11 @@ export async function POST(request: Request) {
       );
     }
 
-    // Send notification email via Resend
+    // Send notification email via Resend (lazy init)
     if (process.env.RESEND_API_KEY) {
+      const { Resend } = await import('resend');
+      const resend = new Resend(process.env.RESEND_API_KEY);
+
       await resend.emails.send({
         from: 'SIM Web <onboarding@resend.dev>',
         to: [NOTIFY_EMAIL],
